@@ -1,6 +1,6 @@
 Structure-Based_Virtual_Screening_Workflow_v1
 Dylan CapittiFenton ⚛️
-Last Updated: 3/29/26
+Last Updated: 3/30/26
 
 This repository contains the following files. Each script contains a brief description of its use, input files, and an example run command below. Please note that dependencies must be installed prior to the provided command.
 
@@ -46,10 +46,10 @@ This repository contains the following files. Each script contains a brief descr
 	- Run: python vsw_filtering_clustering.py --vsw-dir . -p 1 -c 0.4 -o results_processed_v1.csv
 
 6) analog_search_biosolveit.sh
-	- Generates 300 analogs per ligands (100 analogs per tool).
+	- Generates 300 analogs per ligand (100 analogs per tool).
 	- Requires SMILES CSV and ligand space file (*.space)
 	- Prior to running edit FT_BIN, SL_BIN, and SM_BIN paths to call to your program file paths
-	- Optionally alter number of hits retained (TOPN), and similarity cut-off for each tool under "Config"
+	- Optionally alter the number of hits retained (TOPN), and the similarity cut-off for each tool under "Config"
 	- Run: ./analog_search_biosolveit.sh seed_ligands.smi analog_search.space
 
 7) dock_score_distribution.py
@@ -64,16 +64,16 @@ This repository contains the following files. Each script contains a brief descr
 	- Run: python3 vsw_analog_fraction_improved.py --vsw-dir . --inputs-csv inputs.csv --inputs-skip-rows 0 --subjobs-glob "**/*vsw-DOCK*.csv" --score-col r_i_docking_score --tools "spacelight,spacemacs,ftrees" --details-csv fraction_improved_details_dedup.csv
 
 9) vsw_best_analog.py
-	- Calculates best dock score improvement from actives and associated best analog dock scores.
+	- Calculates the best dock score improvement from actives and associated best analog dock scores.
 	- Requires Glide subjob CSV output files.
 	- Run: python3 vsw_best_analog.py --vsw-dir . --inputs-csv inputs.csv --inputs-skip-rows 0 --subjobs-glob "**/*vsw-DOCK*.csv"  --inputs-skip-rows 0 --subjobs-glob "**/*vsw-DOCK*.csv" --score-col r_i_docking_score --out-csv out_v1.csv
 
 10) calculate_molecular_properties.py
-	- Takes SMILES strings and output associated chemical properties.
+	- Takes SMILES strings and outputs associated chemical properties.
 	- Requires SMILES CSV and RDKit to be installed
 	- Run: python3 calculate_molecular_properties.py ligs.csv -o ligs_props.csv -s SMILES
 
 11) centerofmass.py
-	- Calculates ligand center of mass for all ligands in working directory using PyMOL
+	- Calculates ligand center of mass for all ligands in the working directory using PyMOL
 	- Requires ligand structure files (*.mol2)
 	- Run: pymol -cq -r centerofmass.py
