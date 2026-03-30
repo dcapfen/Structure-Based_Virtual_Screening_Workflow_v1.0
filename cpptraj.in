@@ -1,0 +1,26 @@
+parm ./md.prmtop
+trajin ./md_step7a.nc
+trajin ./md_step7b.nc
+trajin ./md_step7c.nc
+trajin ./md_step7d.nc
+trajin ./md_step8a.nc
+trajin ./md_step8b.nc
+trajin ./md_step8c.nc
+trajin ./md_step8d.nc
+strip !(:1-333)
+autoimage anchor :1-333
+rms first :1-333@C,N,O,CA
+cluster cO \
+        dbscan minpoints 4 epsilon 2.00 sievetoframe \
+        rms :1-333@C,N,O,CA,CB&!@H= \
+        sieve 10 \
+        out cnumvtime.dat \
+        summary summary.dat \
+        info info.dat \
+        cpopvtime cpopvtime.agr normframe \
+        repout rep repfmt pdb \
+        singlerepout singlerep.nc singlerepfmt netcdf \
+        avgout avg avgfmt pdb
+run
+exit
+
